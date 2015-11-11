@@ -1,11 +1,19 @@
 # Requirements
 
 
-# Parameters
-The following environmental variables must be populated. 
+# Environmental
+The following environmental variables must be populated, when running container 
 
-SICKBEARD_LISTEN_PORT
-DEPOT_USER,
-DEPOT_PASSWORD
-SICKBEARD_API_KEY
-PUSHOVER_USER_KEY
+# Ports
+The following ports must be mapped, when running container 
+
+ - 32400 #webui listen 
+ 
+# Volumes
+The following volumes must be mapped, when running container 
+
+- /srv/plex/config
+- /srv/plex/data
+- /mnt/tvshows
+- /mnt/movies
+- /mnt/music

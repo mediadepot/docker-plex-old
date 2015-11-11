@@ -1,9 +1,12 @@
 FROM debian:jessie
 MAINTAINER jason@thesparktree.com
 
+#Create internal depot user (which will be mapped to external DEPOT_USER, with the uid and gid values)
+RUN groupadd -g 15000 -r depot && useradd --uid 15000 -r -g depot depot
+
 #Install base applications + deps
 RUN apt-get -q update && \
-    apt-get install -qy --force-yes python-cheetah avahi-daemon avahi-utils unrar curl && \
+    apt-get install -qy --force-yes python-cheetah avahi-daemon avahi-utils curl && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
@@ -29,6 +32,8 @@ RUN curl -L https://downloads.plex.tv/plex-media-server/0.9.12.19.1537-f38ac80/p
 #Move the application files
 RUN cp -R /usr/lib/plexmediaserver/. /srv/plex/app && \
     rm -rf /usr/lib/plexmediaserver
+
+RUN chown -R depot:depot /srv/plex
 
 #Copy over start script
 ADD ./start.sh /srv/start.sh
