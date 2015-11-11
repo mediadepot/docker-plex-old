@@ -22,21 +22,16 @@ RUN curl -L https://downloads.plex.tv/plex-media-server/0.9.12.19.1537-f38ac80/p
 
 #Configure plexmediaserver to be container friendly,
 #Stop the autostarted plex service, and delete the service file
-RUN service plexmediaserver stop && \
-    update-rc.d -f plexmediaserver remove && \
-    rm -f /etc/init.d/plexmediaserver && \
-    pkill -9 -e Plex
+#RUN service plexmediaserver stop && \
+#    update-rc.d -f plexmediaserver remove && \
+#    rm -f /etc/init.d/plexmediaserver && \
+#    pkill -9 -e Plex
 
 #Move the application files
 RUN cp -R /usr/lib/plexmediaserver/. /srv/plex/app && \
     rm -rf /usr/lib/plexmediaserver
 
-#Move the data files
-RUN cp -R /var/lib/plexmediaserver/Library/Application Support/. /srv/plex/data && \
-    rm -rf /var/lib/plexmediaserver/Library/Application Support/
-
-
-#Copy over start script and docker-gen files
+#Copy over start script
 ADD ./start.sh /srv/start.sh
 RUN chmod u+x  /srv/start.sh
 
