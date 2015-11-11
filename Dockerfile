@@ -2,7 +2,6 @@ FROM debian:jessie
 MAINTAINER jason@thesparktree.com
 
 #Install base applications + deps
-RUN echo "deb http://http.us.debian.org/debian stable main contrib non-free" | tee -a /etc/apt/sources.list
 RUN apt-get -q update && \
     apt-get install -qy --force-yes python-cheetah avahi-daemon avahi-utils unrar curl && \
     apt-get -y autoremove && \
