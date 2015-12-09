@@ -6,7 +6,7 @@ RUN groupadd -g 15000 -r depot && useradd --uid 15000 -r -g depot depot
 
 #Install base applications + deps
 RUN apt-get -q update && \
-    apt-get install -qy --force-yes python-cheetah avahi-daemon avahi-utils curl && \
+    apt-get install -qy --force-yes avahi-daemon avahi-utils curl && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
