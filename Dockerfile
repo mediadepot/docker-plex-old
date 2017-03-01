@@ -18,7 +18,7 @@ RUN mkdir -p /srv/plex/app && \
 
 
 #Install Plex
-RUN curl -L https://downloads.plex.tv/plex-media-server/0.9.16.6.1993-5089475/plexmediaserver_0.9.16.6.1993-5089475_amd64.deb -o plexmediaserver.deb && \
+RUN curl -L https://downloads.plex.tv/plex-media-server/1.3.4.3285-b46e0ea/plexmediaserver_1.3.4.3285-b46e0ea_amd64.deb -o plexmediaserver.deb && \
 	dpkg -i plexmediaserver.deb && \
 	rm  /plexmediaserver.deb
 
