@@ -39,7 +39,7 @@ RUN chown -R depot:depot /srv/plex
 ADD ./start.sh /srv/start.sh
 RUN chmod u+x  /srv/start.sh
 
-VOLUME ["/srv/plex/app", "/srv/plex/data"]
+VOLUME ["/srv/plex/data"]
 
 EXPOSE 32400
 
