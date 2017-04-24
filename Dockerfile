@@ -18,7 +18,8 @@ RUN mkdir -p /srv/plex/app && \
 
 
 #Install latest plex
-RUN curl -L $(curl -L https://plex.tv/api/downloads/1.json | jq -r '.computer.Linux.releases[0].url') -o plexmediaserver.deb && \
+RUN curl -L https://plex.tv/api/downloads/1.json | jq -r '.computer.Linux.releases[0].url' > /srv/plex/version.txt && \
+	curl -L $(cat /srv/plex/version.txt) -o plexmediaserver.deb && \
 	dpkg -i plexmediaserver.deb && \
 	rm  /plexmediaserver.deb
 
