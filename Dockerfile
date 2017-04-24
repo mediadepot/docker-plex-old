@@ -6,7 +6,7 @@ RUN groupadd -g 15000 -r depot && useradd --uid 15000 -r -g depot depot
 
 #Install base applications + deps
 RUN apt-get -q update && \
-    apt-get install -qy --force-yes avahi-daemon avahi-utils curl && \
+    apt-get install -qy --force-yes avahi-daemon avahi-utils curl jq && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
@@ -17,8 +17,8 @@ RUN mkdir -p /srv/plex/app && \
 	mkdir -p /srv/plex/data
 
 
-#Install Plex
-RUN curl -L https://downloads.plex.tv/plex-media-server/1.3.4.3285-b46e0ea/plexmediaserver_1.3.4.3285-b46e0ea_amd64.deb -o plexmediaserver.deb && \
+#Install latest plex
+RUN curl -L $(curl -L https://plex.tv/api/downloads/1.json | jq -r '.computer.Linux.releases[0].url') -o plexmediaserver.deb && \
 	dpkg -i plexmediaserver.deb && \
 	rm  /plexmediaserver.deb
 
